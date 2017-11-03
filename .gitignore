@@ -66,4 +66,12 @@ fabric.properties
 # Sonarlint plugin
 .idea/sonarlint
 
+.idea/.name
+.idea/compiler.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+rest4mex.iml
+target/.DS_Store
+
 # End of https://www.gitignore.io/api/intellij
