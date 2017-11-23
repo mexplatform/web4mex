@@ -22,9 +22,10 @@ import org.aksw.mex.interfaces.MetaGeneration;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-import javax.json.JsonObject;
-import javax.json.stream.JsonParser;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 
+import org.json.simple.parser.ParseException;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -33,11 +34,12 @@ public class ExperimentController {
     private final static MyMEX mex = new MyMEX();
 
     @PostMapping(value = {"/experimentinfo"}, consumes = {"text/plain", "application/json"}, produces = {"text/plain", "application/json"})
-    public String setExperimentInfo(@RequestBody String content){
+    public String setExperimentInfo(@RequestBody String content) throws ParseException {
 
         JSONParser parser = new JSONParser();
-        Object obj = parser.parse(content);
+        Object obj = parser.parse(content);   //content);
         JSONObject jsonObject = (JSONObject) obj;
+
 
         System.out.println(content);
 
