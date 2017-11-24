@@ -19,14 +19,18 @@ import org.aksw.mex.log4mex.MEXSerializer;
 import org.aksw.mex.interfaces.MetaGeneration;
 
 
-
+import java.io.IOException;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-
 import org.json.simple.parser.ParseException;
+
 import org.springframework.web.bind.annotation.*;
+
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.StringReader;
 
 @RestController
 public class ExperimentController {
@@ -34,14 +38,21 @@ public class ExperimentController {
     private final static MyMEX mex = new MyMEX();
 
     @PostMapping(value = {"/experimentinfo"}, consumes = {"text/plain", "application/json"}, produces = {"text/plain", "application/json"})
-    public String setExperimentInfo(@RequestBody String content) throws ParseException {
+    public String setExperimentInfo(@RequestBody String content) throws Exception {
+
 
         JSONParser parser = new JSONParser();
-        Object obj = parser.parse(content);   //content);
+        Object obj = parser.parse(content);
         JSONObject jsonObject = (JSONObject) obj;
 
+        String path =  (System.getProperty("user.dir") + "/cache");
 
-        System.out.println(content);
+        System.out.println(path);
+
+        try(FileWriter file = new FileWriter((path + "/algorithm.txt"))){
+            file.write(jsonObject.toJSONString());
+            System.out.println(jsonObject);
+        }
 
         return "";
     }
