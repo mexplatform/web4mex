@@ -90,9 +90,25 @@ public class ExperimentController {
 
     }
 
-    //Execution
+    //Executions
+    @PostMapping(value = {"/algorithm"}, consumes = {"text/plain", "application/json"}, produces = {"text/plain", "application/json"})
+    public void setExecutions(@RequestBody String content) throws Exception {
+
+        String filename = "/executions.txt";
+
+        this.saveIntoCache(content, filename);
+
+    }
 
     //Features
+    @PostMapping(value = {"/algorithm"}, consumes = {"text/plain", "application/json"}, produces = {"text/plain", "application/json"})
+    public void setFeatures(@RequestBody String content) throws Exception {
+
+        String filename = "/features.txt";
+
+        this.saveIntoCache(content, filename);
+
+    }
 
     //Sampling Method
 
