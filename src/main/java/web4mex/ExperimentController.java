@@ -121,6 +121,14 @@ public class ExperimentController {
     }
 
     //Interface Version
+    @PostMapping(value = {"/algorithm"}, consumes = {"text/plain", "application/json"}, produces = {"text/plain", "application/json"})
+    public void setInterfaceVersion(@RequestBody String content) throws Exception {
+
+        String filename = "/interfaceversion.txt";
+
+        this.saveIntoCache(content, filename);
+
+    }
 
     //Measures
 
