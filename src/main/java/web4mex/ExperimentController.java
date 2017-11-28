@@ -32,38 +32,57 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.StringReader;
 
+
 @RestController
 public class ExperimentController {
 
     private final static MyMEX mex = new MyMEX();
 
-    @PostMapping(value = {"/experimentinfo"}, consumes = {"text/plain", "application/json"}, produces = {"text/plain", "application/json"})
-    public String setExperimentInfo(@RequestBody String content) throws Exception {
+    public void saveIntoCache(String content, String filename) throws Exception{
 
+        /* This method receives the input data comming from the user and saves into a text file on the cache folder */
 
-        JSONParser parser = new JSONParser();
-        Object obj = parser.parse(content);
-        JSONObject jsonObject = (JSONObject) obj;
+        String path =  (System.getProperty("user.dir") + "/src/main/java/web4mex/cache");
 
-        String path =  (System.getProperty("user.dir") + "/cache");
-
-        System.out.println(path);
-
-        try(FileWriter file = new FileWriter((path + "/algorithm.txt"))){
-            file.write(jsonObject.toJSONString());
-            System.out.println(jsonObject);
+        try(FileWriter file = new FileWriter((path + filename))){
+            file.write(content);
         }
 
-        return "";
     }
 
+    //Experiment Info
+    @PostMapping(value = {"/experimentinfo"}, consumes = {"text/plain", "application/json"}, produces = {"text/plain", "application/json"})
+    public void setExperimentInfo(@RequestBody String content) throws Exception {
+
+        String filename = "/experimentinfo.txt";
+
+        this.saveIntoCache(content, filename);
+
+    }
+
+    // Hardware Info
     @PostMapping(value = {"/hardwareinfo"}, consumes = {"text/plain", "application/json"}, produces = {"text/plain", "application/json"})
-    public String setHardwareInfo(@RequestBody String content){
+    public void setHardwareInfo(@RequestBody String content) throws Exception {
 
-        System.out.println(content);
+        String filename = "/hardwareinfo.txt";
 
-        return "";
+        this.saveIntoCache(content, filename);
+
     }
+
+    //Algorithm
+
+    //Dataset
+
+    //Execution
+
+    //Features
+
+    //Sampling Method
+
+    //Interface Version
+
+    //Measures
 
 }
 
