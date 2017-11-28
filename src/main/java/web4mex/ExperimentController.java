@@ -71,6 +71,14 @@ public class ExperimentController {
     }
 
     //Algorithm
+    @PostMapping(value = {"/algorithm"}, consumes = {"text/plain", "application/json"}, produces = {"text/plain", "application/json"})
+    public void setAlgorithmInfo(@RequestBody String content) throws Exception {
+
+        String filename = "/algorithm.txt";
+
+        this.saveIntoCache(content, filename);
+
+    }
 
     //Dataset
 
