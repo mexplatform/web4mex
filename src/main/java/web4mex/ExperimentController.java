@@ -111,6 +111,14 @@ public class ExperimentController {
     }
 
     //Sampling Method
+    @PostMapping(value = {"/algorithm"}, consumes = {"text/plain", "application/json"}, produces = {"text/plain", "application/json"})
+    public void setSamplingMethod(@RequestBody String content) throws Exception {
+
+        String filename = "/samplingmethod.txt";
+
+        this.saveIntoCache(content, filename);
+
+    }
 
     //Interface Version
 
