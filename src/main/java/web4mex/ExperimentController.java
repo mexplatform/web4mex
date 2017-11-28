@@ -81,7 +81,7 @@ public class ExperimentController {
     }
 
     //Dataset
-    @PostMapping(value = {"/algorithm"}, consumes = {"text/plain", "application/json"}, produces = {"text/plain", "application/json"})
+    @PostMapping(value = {"/datasetinfo"}, consumes = {"text/plain", "application/json"}, produces = {"text/plain", "application/json"})
     public void setDatasetInfo(@RequestBody String content) throws Exception {
 
         String filename = "/dataset.txt";
@@ -91,7 +91,7 @@ public class ExperimentController {
     }
 
     //Executions
-    @PostMapping(value = {"/algorithm"}, consumes = {"text/plain", "application/json"}, produces = {"text/plain", "application/json"})
+    @PostMapping(value = {"/executions"}, consumes = {"text/plain", "application/json"}, produces = {"text/plain", "application/json"})
     public void setExecutions(@RequestBody String content) throws Exception {
 
         String filename = "/executions.txt";
@@ -101,7 +101,7 @@ public class ExperimentController {
     }
 
     //Features
-    @PostMapping(value = {"/algorithm"}, consumes = {"text/plain", "application/json"}, produces = {"text/plain", "application/json"})
+    @PostMapping(value = {"/features"}, consumes = {"text/plain", "application/json"}, produces = {"text/plain", "application/json"})
     public void setFeatures(@RequestBody String content) throws Exception {
 
         String filename = "/features.txt";
@@ -111,7 +111,7 @@ public class ExperimentController {
     }
 
     //Sampling Method
-    @PostMapping(value = {"/algorithm"}, consumes = {"text/plain", "application/json"}, produces = {"text/plain", "application/json"})
+    @PostMapping(value = {"/samplingmethod"}, consumes = {"text/plain", "application/json"}, produces = {"text/plain", "application/json"})
     public void setSamplingMethod(@RequestBody String content) throws Exception {
 
         String filename = "/samplingmethod.txt";
@@ -121,7 +121,7 @@ public class ExperimentController {
     }
 
     //Interface Version
-    @PostMapping(value = {"/algorithm"}, consumes = {"text/plain", "application/json"}, produces = {"text/plain", "application/json"})
+    @PostMapping(value = {"/interfaceversion"}, consumes = {"text/plain", "application/json"}, produces = {"text/plain", "application/json"})
     public void setInterfaceVersion(@RequestBody String content) throws Exception {
 
         String filename = "/interfaceversion.txt";
@@ -131,6 +131,14 @@ public class ExperimentController {
     }
 
     //Measures
+    @PostMapping(value = {"/measures"}, consumes = {"text/plain", "application/json"}, produces = {"text/plain", "application/json"})
+    public void setMeasures(@RequestBody String content) throws Exception {
+
+        String filename = "/interfaceversion.txt";
+
+        this.saveIntoCache(content, filename);
+
+    }
 
 }
 
