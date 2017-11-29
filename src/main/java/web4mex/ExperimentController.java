@@ -36,7 +36,7 @@ import java.io.StringReader;
 @RestController
 public class ExperimentController {
 
-    private final static MyMEX mex = new MyMEX();
+
 
     public void saveIntoCache(String content, String filename) throws Exception{
 
@@ -59,6 +59,8 @@ public class ExperimentController {
         this.saveIntoCache(content, filename);
 
     }
+
+
 
     // Hardware Info
     @PostMapping(value = {"/hardwareinfo"}, consumes = {"text/plain", "application/json"}, produces = {"text/plain", "application/json"})
@@ -89,6 +91,7 @@ public class ExperimentController {
         this.saveIntoCache(content, filename);
 
     }
+
 
     //Executions
     @PostMapping(value = {"/executions"}, consumes = {"text/plain", "application/json"}, produces = {"text/plain", "application/json"})
@@ -134,9 +137,46 @@ public class ExperimentController {
     @PostMapping(value = {"/measures"}, consumes = {"text/plain", "application/json"}, produces = {"text/plain", "application/json"})
     public void setMeasures(@RequestBody String content) throws Exception {
 
-        String filename = "/interfaceversion.txt";
+        String filename = "/measures.txt";
 
         this.saveIntoCache(content, filename);
+
+    }
+
+    @PostMapping(value = {"/start"})
+    public void start() throws  Exception{
+        JSONParser parser = new JSONParser();
+
+        MyMEX mex = new MyMEX();
+
+        String path =  (System.getProperty("user.dir") + "/src/main/java/web4mex/cache");
+
+        //Experiment Info
+
+        Object experimentInfo = parser.parse(new FileReader(path + "/experimentinfo.txt"));
+        JSONObject jsonExperimentInfo = (JSONObject) experimentInfo;
+
+        String experimentId = (String) jsonExperimentInfo.get("id"); // Cast long to string ???
+        String experimentTitle = (String) jsonExperimentInfo.get("title");
+        String experimentDescription = (String) jsonExperimentInfo.get("description");
+        String authorEmail= (String) jsonExperimentInfo.get("email");
+        String authorName = (String) jsonExperimentInfo.get("author");
+        //Date experimentDate = (Date) jsonExperimentInfo.get("date");
+        MEXEnum.EnumContexts context = MEXEnum.EnumContexts.valueOf((String) jsonExperimentInfo.get("context")); //Change to String on Log4MEX
+
+        mex.setExperimentId(experimentId);
+        mex.setExperimentTitle(experimentTitle);
+        mex.setExperimentDescription(experimentDescription);
+        mex.setAuthorEmail(authorEmail);
+        mex.setAuthorName(authorName);
+        //mex.setExperimentDate(experimentDate);
+        mex.setContext(context);
+
+        //Experiment
+
+
+        MEXSerializer.getInstance().saveToDisk(path + "/experiment",path + "/experiment", mex, MEXConstant.EnumRDFFormats.TTL);
+
 
     }
 
