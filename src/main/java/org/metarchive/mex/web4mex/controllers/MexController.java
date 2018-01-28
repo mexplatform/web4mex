@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.ws.rs.core.MediaType;
+
 @RestController
 public class MexController {
 
@@ -27,17 +29,17 @@ public class MexController {
 		experimentService.getCacheByUser(token).setAuthorEmail(authorEmail);
 	}
 
-	@PostMapping(value = { "/{token}/context" })
-	public void setContext(@RequestBody MEXEnum.EnumContexts context, @PathVariable String token) {
-		experimentService.getCacheByUser(token).setContext(context);
-	}
+    @PostMapping(value = { "/{token}/context" })
+    public void setContext(@RequestBody String context, @PathVariable String token) {
+        experimentService.getCacheByUser(token).setContext(MEXEnum.EnumContexts.valueOf(context));
+    }
 
 	@PostMapping(value = { "/{token}/organization" })
 	public void setOrganization(@RequestBody String organization, @PathVariable String token) {
 		experimentService.getCacheByUser(token).setOrganization(organization);
 	}
 
-	@GetMapping(value = { "/{token}/serialize" })
+	@GetMapping(value = { "/{token}/serialize" }, produces = MediaType.TEXT_PLAIN)
 	public @ResponseBody String serialize(@PathVariable String token, @RequestParam String format)
 			throws Exception {
 		return experimentService.serializeExperiment(token, format);
