@@ -17,51 +17,54 @@ import org.springframework.stereotype.Service;
 @Service
 public class ExperimentService {
 
-	@Autowired
-	Web4MexProperties web4MexProperties;
+    @Autowired
+    Web4MexProperties web4MexProperties;
 
-	HashMap<String, MyMEX> cache = new HashMap<>();
+    HashMap<String, MyMEX> cache = new HashMap<>();
 
-	public MyMEX getCacheByUser(String token) {
-		if (cache.get(token) == null)
-			cache.put(token, new MyMEX());
+    public MyMEX getCacheByUser(String token) {
+        if (cache.get(token) == null)
+            cache.put(token, new MyMEX());
 
-		return cache.get(token);
-	}
+        return cache.get(token);
+    }
 
-	public String serializeExperiment(String userId, String serializationFormat) throws Exception {
+    public String serializeExperiment(String userId, String serializationFormat) throws Exception {
 
-		String fileName = web4MexProperties.getTmpDir() + "/mex_" + userId;
+        String fileName = web4MexProperties.getTmpDir() + "/mex_" + userId;
 
-		serializeAndSave(userId, serializationFormat, fileName);
-		String rdf = readFile(fileName).toString();
-		deleteFile(fileName);
+        new File(web4MexProperties.getTmpDir()).mkdirs();
 
-		return rdf;
-	}
+        serializeAndSave(userId, serializationFormat, fileName);
+        String rdf = readFile(fileName + "." + serializationFormat.toLowerCase()).toString();
+        deleteFile(fileName + "." + serializationFormat.toLowerCase());
 
-	protected void serializeAndSave(String userId, String serializationFormat, String fileName) throws Exception {
+        return rdf;
+    }
 
-		// TODO Create a serialization method that doesn't require to use filesystem.
-		MEXSerializer.getInstance().saveToDisk(fileName, web4MexProperties.getUriBase() + userId,
-				getCacheByUser(userId), MEXConstant.EnumRDFFormats.valueOf(serializationFormat.toUpperCase()));
+    protected void serializeAndSave(String userId, String serializationFormat, String fileName) throws Exception {
 
-	}
+        // TODO Create a serialization method that doesn't require to use filesystem.
+        MEXSerializer.getInstance().saveToDisk(fileName, web4MexProperties.getUriBase() + userId,
+                getCacheByUser(userId), MEXConstant.EnumRDFFormats.valueOf(serializationFormat.toUpperCase()));
 
-	protected StringBuffer readFile(String fileName) throws IOException {
+    }
 
-		StringBuffer rdf = new StringBuffer();
-		try (BufferedReader r = Files.newBufferedReader(Paths.get(fileName))) {
-			r.lines().forEach((a) -> {
-				rdf.append(a);
-			});
-		}
+    protected StringBuffer readFile(String fileName) throws IOException {
 
-		return rdf;
-	}
+        StringBuffer rdf = new StringBuffer();
+        try (BufferedReader r = Files.newBufferedReader(Paths.get(fileName))) {
+            r.lines().forEach((a) -> {
+                rdf.append(a);
+                rdf.append("\n");
+            });
+        }
 
-	protected void deleteFile(String fileName) {
-		new File(fileName).delete();
-	}
+        return rdf;
+    }
+
+    protected void deleteFile(String fileName) {
+        new File(fileName).delete();
+    }
 
 }
