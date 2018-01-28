@@ -10,11 +10,15 @@ import java.util.HashMap;
 import org.metarchive.mex.core.MEXConstant;
 import org.metarchive.mex.log4mex.MEXSerializer;
 import org.metarchive.mex.log4mex.MyMEX;
+import org.metarchive.mex.web4mex.Web4MexProperties;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-
 public class ExperimentService {
+
+	@Autowired
+	Web4MexProperties web4MexProperties;
 
 	HashMap<String, MyMEX> cache = new HashMap<>();
 
@@ -26,8 +30,8 @@ public class ExperimentService {
 	}
 
 	public String serializeExperiment(String userId, String serializationFormat) throws Exception {
-		
-		String fileName = "/tmp/mex_" + userId;
+
+		String fileName = web4MexProperties.getTmpDir() + "/mex_" + userId;
 
 		serializeAndSave(userId, serializationFormat, fileName);
 		String rdf = readFile(fileName).toString();
@@ -35,31 +39,29 @@ public class ExperimentService {
 
 		return rdf;
 	}
-	
+
 	protected void serializeAndSave(String userId, String serializationFormat, String fileName) throws Exception {
-		
 
 		// TODO Create a serialization method that doesn't require to use filesystem.
-		MEXSerializer.getInstance().saveToDisk(fileName, "http://metarchive.org/mex/experiments/" + userId,
+		MEXSerializer.getInstance().saveToDisk(fileName, web4MexProperties.getUriBase() + userId,
 				getCacheByUser(userId), MEXConstant.EnumRDFFormats.valueOf(serializationFormat.toUpperCase()));
-		
+
 	}
 
 	protected StringBuffer readFile(String fileName) throws IOException {
-		
+
 		StringBuffer rdf = new StringBuffer();
 		try (BufferedReader r = Files.newBufferedReader(Paths.get(fileName))) {
 			r.lines().forEach((a) -> {
 				rdf.append(a);
 			});
 		}
-		
+
 		return rdf;
 	}
-	
+
 	protected void deleteFile(String fileName) {
 		new File(fileName).delete();
 	}
-	
-	
+
 }
