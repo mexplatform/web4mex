@@ -16,30 +16,30 @@ public class MexController {
 	@Autowired
 	ExperimentService experimentService;
 
-	@PostMapping(value = { "/{userId}/authorName" })
-	public void setAuthorName(@RequestBody String authorName, @RequestParam String userId) {
-		experimentService.getCacheByUser(userId).setAuthorName(authorName);
+	@PostMapping(value = { "/{token}/authorName" })
+	public void setAuthorName(@RequestBody String authorName, @RequestParam String token) {
+		experimentService.getCacheByUser(token).setAuthorName(authorName);
 	}
 
-	@PostMapping(value = { "/{userId}/authorEmail" })
-	public void setAuthorEmail(@RequestBody String authorEmail, @RequestParam String userId) {
-		experimentService.getCacheByUser(userId).setAuthorEmail(authorEmail);
+	@PostMapping(value = { "/{token}/authorEmail" })
+	public void setAuthorEmail(@RequestBody String authorEmail, @RequestParam String token) {
+		experimentService.getCacheByUser(token).setAuthorEmail(authorEmail);
 	}
 
-	@PostMapping(value = { "/{userId}/context" })
-	public void setContext(@RequestBody MEXEnum.EnumContexts context, @RequestParam String userId) {
-		experimentService.getCacheByUser(userId).setContext(context);
+	@PostMapping(value = { "/{token}/context" })
+	public void setContext(@RequestBody MEXEnum.EnumContexts context, @RequestParam String token) {
+		experimentService.getCacheByUser(token).setContext(context);
 	}
 
-	@PostMapping(value = { "/{userId}/organization" })
-	public void setOrganization(@RequestBody String organization, @RequestParam String userId) {
-		experimentService.getCacheByUser(userId).setOrganization(organization);
+	@PostMapping(value = { "/{token}/organization" })
+	public void setOrganization(@RequestBody String organization, @RequestParam String token) {
+		experimentService.getCacheByUser(token).setOrganization(organization);
 	}
 
-	@GetMapping(value = { "/{userId}/serialize?format={serializationFormat}" })
-	public @ResponseBody String serialize(@RequestParam String userId, @RequestParam String serializationFormat)
+	@GetMapping(value = { "/{token}/serialize?format={serializationFormat}" })
+	public @ResponseBody String serialize(@RequestParam String token, @RequestParam String serializationFormat)
 			throws Exception {
-		return experimentService.serializeExperiment(userId, serializationFormat);
+		return experimentService.serializeExperiment(token, serializationFormat);
 	}
 
 }

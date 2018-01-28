@@ -18,11 +18,11 @@ public class ExperimentService {
 
 	HashMap<String, MyMEX> cache = new HashMap<>();
 
-	public MyMEX getCacheByUser(String userId) {
-		if (cache.get(userId) == null)
-			cache.put(userId, new MyMEX());
+	public MyMEX getCacheByUser(String token) {
+		if (cache.get(token) == null)
+			cache.put(token, new MyMEX());
 
-		return cache.get(userId);
+		return cache.get(token);
 	}
 
 	public String serializeExperiment(String userId, String serializationFormat) throws Exception {

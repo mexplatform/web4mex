@@ -17,44 +17,44 @@ public class ExperimentController {
 	ExperimentService experimentService;
 
 	
-	@PostMapping(value = { "/{userId}/experimentId" })
-	public void setExperimentId(@RequestBody String experimentId, @RequestParam String userId) {
-		experimentService.getCacheByUser(userId).setExperimentId(experimentId);
+	@PostMapping(value = { "/{token}/experimentId" })
+	public void setExperimentId(@RequestBody String experimentId, @RequestParam String token) {
+		experimentService.getCacheByUser(token).setExperimentId(experimentId);
 	}	
 	
-	@PostMapping(value = { "/{userId}/experimentTitle" })
-	public void setExperimentTitle(@RequestBody String experimentTitle, @RequestParam String userId) {
-		experimentService.getCacheByUser(userId).setExperimentTitle(experimentTitle);
+	@PostMapping(value = { "/{token}/experimentTitle" })
+	public void setExperimentTitle(@RequestBody String experimentTitle, @RequestParam String token) {
+		experimentService.getCacheByUser(token).setExperimentTitle(experimentTitle);
 	}		
 	
-	@PostMapping(value = { "/{userId}/experimentDate" })
-	public void setExperimentDate(@RequestBody String experimentDate, @RequestParam String userId) throws ParseException {
-		experimentService.getCacheByUser(userId).setExperimentDate(DateFormat.getDateInstance().parse(experimentDate));
+	@PostMapping(value = { "/{token}/experimentDate" })
+	public void setExperimentDate(@RequestBody String experimentDate, @RequestParam String token) throws ParseException {
+		experimentService.getCacheByUser(token).setExperimentDate(DateFormat.getDateInstance().parse(experimentDate));
 	}		
 	
-	@PostMapping(value = { "/{userId}/experimentDescription" })
-	public void setExperimentDescription(@RequestBody String experimentDescription, @RequestParam String userId) throws ParseException {
-		experimentService.getCacheByUser(userId).setExperimentDescription(experimentDescription);
+	@PostMapping(value = { "/{token}/experimentDescription" })
+	public void setExperimentDescription(@RequestBody String experimentDescription, @RequestParam String token) throws ParseException {
+		experimentService.getCacheByUser(token).setExperimentDescription(experimentDescription);
 	}		
 	
-	@PostMapping(value = { "/{userId}/experimentDataNormalizationDescription" })
-	public void setExperimentDataNormalizationDescription(@RequestBody String experimentDataNormalizationDescription, @RequestParam String userId) throws ParseException {
-		experimentService.getCacheByUser(userId).setExperimentDataNormalizationDescription(experimentDataNormalizationDescription);
+	@PostMapping(value = { "/{token}/experimentDataNormalizationDescription" })
+	public void setExperimentDataNormalizationDescription(@RequestBody String experimentDataNormalizationDescription, @RequestParam String token) throws ParseException {
+		experimentService.getCacheByUser(token).setExperimentDataNormalizationDescription(experimentDataNormalizationDescription);
 	}		
 	
-	@PostMapping(value = { "/{userId}/experimentNoiseRemovalDescription" })
-	public void setExperimentNoiseRemovalDescription(@RequestBody String experimentNoiseRemovalDescription, @RequestParam String userId) throws ParseException {
-		experimentService.getCacheByUser(userId).setExperimentNoiseRemovalDescription(experimentNoiseRemovalDescription);
+	@PostMapping(value = { "/{token}/experimentNoiseRemovalDescription" })
+	public void setExperimentNoiseRemovalDescription(@RequestBody String experimentNoiseRemovalDescription, @RequestParam String token) throws ParseException {
+		experimentService.getCacheByUser(token).setExperimentNoiseRemovalDescription(experimentNoiseRemovalDescription);
 	}		
 	
-	@PostMapping(value = { "/{userId}/experimentAttributeSelectionDescription" })
-	public void setExperimentAttributeSelectionDescription(@RequestBody String experimentAttributeSelectionDescription, @RequestParam String userId) throws ParseException {
-		experimentService.getCacheByUser(userId).setExperimentAttributeSelectionDescription(experimentAttributeSelectionDescription);
+	@PostMapping(value = { "/{token}/experimentAttributeSelectionDescription" })
+	public void setExperimentAttributeSelectionDescription(@RequestBody String experimentAttributeSelectionDescription, @RequestParam String token) throws ParseException {
+		experimentService.getCacheByUser(token).setExperimentAttributeSelectionDescription(experimentAttributeSelectionDescription);
 	}		
 	
-	@PostMapping(value = { "/{userId}/experimentOutlierDetectionDescription" })
-	public void setExperimentOutlierDetectionDescription(@RequestBody String experimentOutlierDetectionDescription, @RequestParam String userId) throws ParseException {
-		experimentService.getCacheByUser(userId).setExperimentOutlierDetectionDescription(experimentOutlierDetectionDescription);
+	@PostMapping(value = { "/{token}/experimentOutlierDetectionDescription" })
+	public void setExperimentOutlierDetectionDescription(@RequestBody String experimentOutlierDetectionDescription, @RequestParam String token) throws ParseException {
+		experimentService.getCacheByUser(token).setExperimentOutlierDetectionDescription(experimentOutlierDetectionDescription);
 	}		
 	
 }
