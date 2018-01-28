@@ -1,4 +1,4 @@
-# web4mex
+# Web4Mex
 
 Web4Mex is a REST service which creates MEX RDF out of plain text. The endpoint swagger documentation is available on http://52.173.249.140:3011/swagger-ui.html 
 
