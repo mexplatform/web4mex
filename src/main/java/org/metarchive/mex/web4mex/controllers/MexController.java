@@ -4,6 +4,7 @@ import org.metarchive.mex.core.MEXEnum;
 import org.metarchive.mex.web4mex.services.ExperimentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,29 +18,29 @@ public class MexController {
 	ExperimentService experimentService;
 
 	@PostMapping(value = { "/{token}/authorName" })
-	public void setAuthorName(@RequestBody String authorName, @RequestParam String token) {
+	public void setAuthorName(@RequestBody String authorName, @PathVariable String token) {
 		experimentService.getCacheByUser(token).setAuthorName(authorName);
 	}
 
 	@PostMapping(value = { "/{token}/authorEmail" })
-	public void setAuthorEmail(@RequestBody String authorEmail, @RequestParam String token) {
+	public void setAuthorEmail(@RequestBody String authorEmail, @PathVariable String token) {
 		experimentService.getCacheByUser(token).setAuthorEmail(authorEmail);
 	}
 
 	@PostMapping(value = { "/{token}/context" })
-	public void setContext(@RequestBody MEXEnum.EnumContexts context, @RequestParam String token) {
+	public void setContext(@RequestBody MEXEnum.EnumContexts context, @PathVariable String token) {
 		experimentService.getCacheByUser(token).setContext(context);
 	}
 
 	@PostMapping(value = { "/{token}/organization" })
-	public void setOrganization(@RequestBody String organization, @RequestParam String token) {
+	public void setOrganization(@RequestBody String organization, @PathVariable String token) {
 		experimentService.getCacheByUser(token).setOrganization(organization);
 	}
 
-	@GetMapping(value = { "/{token}/serialize?format={serializationFormat}" })
-	public @ResponseBody String serialize(@RequestParam String token, @RequestParam String serializationFormat)
+	@GetMapping(value = { "/{token}/serialize" })
+	public @ResponseBody String serialize(@PathVariable String token, @RequestParam String format)
 			throws Exception {
-		return experimentService.serializeExperiment(token, serializationFormat);
+		return experimentService.serializeExperiment(token, format);
 	}
 
 }

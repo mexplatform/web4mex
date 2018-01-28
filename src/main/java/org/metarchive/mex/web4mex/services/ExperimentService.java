@@ -41,7 +41,7 @@ public class ExperimentService {
 
 		// TODO Create a serialization method that doesn't require to use filesystem.
 		MEXSerializer.getInstance().saveToDisk(fileName, "http://metarchive.org/mex/experiments/" + userId,
-				getCacheByUser(userId), MEXConstant.EnumRDFFormats.valueOf(serializationFormat));
+				getCacheByUser(userId), MEXConstant.EnumRDFFormats.valueOf(serializationFormat.toUpperCase()));
 		
 	}
 
