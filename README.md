@@ -7,7 +7,7 @@ Web4Mex is a REST service which creates MEX RDF out of plain text. The endpoint 
 Three simple steps are necessary to create your first MEX file.
 
 ### Get a token!
-The following request generates a token which sould be used to create your experiment:
+The following request generates a token which should be used to create your experiment:
 
 http://52.173.249.140:3011/token
 
@@ -24,4 +24,4 @@ The experiment itself can be described using the [Experiment Endpoint](http://52
 ## Get your MEX description in RDF!
 Done with adding basic data about your experiment?
 
-Now you can get your MEX description using the [Serializer Endpoint](http://52.173.249.140:3011/swagger-ui.html#!/mex45controller/serializeUsingGET). Send the token and the desired format (e.g. ttl) to receive your MEX RDF data! 
+Now you can get your MEX description using the [Serializer Endpoint](http://52.173.249.140:3011/swagger-ui.html#!/mex45controller/serializeUsingGET). Send the token and the desired format (e.g., ttl) to receive your MEX RDF data! 
