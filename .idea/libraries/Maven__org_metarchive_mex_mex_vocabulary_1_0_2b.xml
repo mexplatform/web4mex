@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.metarchive.mex:mex-vocabulary:1.0.2b">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/metarchive/mex/mex-vocabulary/1.0.2b/mex-vocabulary-1.0.2b.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/metarchive/mex/mex-vocabulary/1.0.2b/mex-vocabulary-1.0.2b-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/metarchive/mex/mex-vocabulary/1.0.2b/mex-vocabulary-1.0.2b-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

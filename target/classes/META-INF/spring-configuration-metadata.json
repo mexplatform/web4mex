@@ -1,0 +1,22 @@
+{
+  "hints": [],
+  "groups": [
+    {
+      "sourceType": "org.metarchive.mex.web4mex.Web4MexProperties",
+      "name": "",
+      "type": "org.metarchive.mex.web4mex.Web4MexProperties"
+    }
+  ],
+  "properties": [
+    {
+      "sourceType": "org.metarchive.mex.web4mex.Web4MexProperties",
+      "name": "tmp-dir",
+      "type": "java.lang.String"
+    },
+    {
+      "sourceType": "org.metarchive.mex.web4mex.Web4MexProperties",
+      "name": "uri-base",
+      "type": "java.lang.String"
+    }
+  ]
+}
