@@ -1,6 +1,7 @@
 package org.metarchive.mex.web4mex.controllers;
 
 import org.metarchive.mex.web4mex.objects.*;
+import org.metarchive.mex.log4mex.ExperimentConfigurationVO;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -66,12 +67,53 @@ public class ExperimentController {
 	@PostMapping(value = { "/{token}/experimentAlgorithm" })
 	public void setExperimentAlgorithm(@RequestBody Algorithm experimentAlgorithm, @PathVariable String token) throws Exception {
         String algorithmID = experimentAlgorithm.getAlgorithmID();
-        String algorithmName = experimentAlgorithm.getAlgorithmName();
-        URI uri = new URI(experimentAlgorithm.getURL());
-        MEXEnum.EnumAlgorithmsClasses algorithmClass = MEXEnum.EnumAlgorithmsClasses.valueOf(experimentAlgorithm.getAlgorithmClass());
-        String idExecution = experimentAlgorithm.getIdExecution();
-        experimentService.getCacheByUser(token).Configuration().addAlgorithm(algorithmID, algorithmName, algorithmClass, uri,  idExecution);
+        MEXEnum.EnumAlgorithmsClasses algorithmClass = experimentAlgorithm.getAlgorithmClass();
+        MEXEnum.EnumExecutionsType executionType = experimentAlgorithm.getExecutionType();
+        MEXEnum.EnumPhases phase = experimentAlgorithm.getPhase();
+        MEXEnum.EnumMeasures measure = experimentAlgorithm.getMeasure();
+        Double measureValue = experimentAlgorithm.getMeasureValue();
+
+        String algo = experimentService.getCacheByUser(token).Configuration().addAlgorithm(algorithmID, algorithmClass);
+        String id = experimentService.getCacheByUser(token).Configuration().addExecution(executionType, phase);
+        experimentService.getCacheByUser(token).Configuration().Execution(id).setAlgorithm(algo);
+        experimentService.getCacheByUser(token).Configuration().Execution(id).addPerformance(measure, measureValue);
 	}
+
+    @PostMapping(value = { "/{token}/experimentDataset" })
+    public void setExperimentDataset(@RequestBody Dataset experimentDataset, @PathVariable String token) throws Exception {
+        String name = experimentDataset.getName();
+        String URI = experimentDataset.getURI();
+        String description = experimentDataset.getDescription();
+        experimentService.getCacheByUser(token).Configuration().setDataSet(URI, description, name);
+    }
+
+    @PostMapping(value = { "/{token}/experimentHardware" })
+    public void setExperimentHardware(@RequestBody Hardware experimentHardware, @PathVariable String token) throws Exception {
+        MEXEnum.EnumProcessors cpu = experimentHardware.getCpu();
+        MEXEnum.EnumRAM memory = experimentHardware.getMemory();
+        String hd = experimentHardware.getHd();
+        MEXEnum.EnumCaches cache = experimentHardware.getCache();
+        String os = experimentHardware.getOs();
+        String video = experimentHardware.getVideo();
+
+        experimentService.getCacheByUser(token).Configuration().setHardwareConfiguration(os, cpu, memory, hd, cache);
+    }
+
+    @PostMapping(value = {"/{token}/experimentSamplingMethod"})
+    public void setSamplingMethod(@RequestBody ExperimentSamplingMethod experimentSamplingMethod, @PathVariable String token) throws Exception {
+        MEXEnum.EnumSamplingMethods SM = experimentSamplingMethod.getaSM();
+	    double trainSize = experimentSamplingMethod.getTrainSize();
+	    double testSize = experimentSamplingMethod.getTestSize();
+	    //int folds = experimentSamplingMethod.getFolds();
+	    //boolean sequential = experimentSamplingMethod.isSequential();
+
+	    experimentService.getCacheByUser(token).Configuration().setSamplingMethod(SM, trainSize, testSize);
+        //experimentService.getCacheByUser(token).Configuration().SamplingMethod().setFolds(folds);
+        //experimentService.getCacheByUser(token).Configuration().SamplingMethod().setSequential(sequential);
+        //experimentService.getCacheByUser(token).Configuration().SamplingMethod()
+
+    }
+
 
 
 }
