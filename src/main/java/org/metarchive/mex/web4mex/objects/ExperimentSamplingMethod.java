@@ -6,8 +6,9 @@ public class ExperimentSamplingMethod {
     MEXEnum.EnumSamplingMethods aSM;
     double trainSize;
     double testSize;
-    int folds;
-    boolean sequential;
+    //int folds;
+    //boolean sequential;
+
 
     public MEXEnum.EnumSamplingMethods getaSM() {
         return aSM;
@@ -31,21 +32,5 @@ public class ExperimentSamplingMethod {
 
     public void setTestSize(double testSize) {
         this.testSize = testSize;
-    }
-
-    public int getFolds() {
-        return folds;
-    }
-
-    public void setFolds(int folds) {
-        this.folds = folds;
-    }
-
-    public boolean isSequential() {
-        return sequential;
-    }
-
-    public void setSequential(boolean sequential) {
-        this.sequential = sequential;
     }
 }

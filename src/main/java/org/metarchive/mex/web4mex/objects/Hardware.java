@@ -3,26 +3,26 @@ package org.metarchive.mex.web4mex.objects;
 import org.metarchive.mex.core.MEXEnum;
 
 public class Hardware {
-    private String cpu;
-    private String memory;
+    private MEXEnum.EnumProcessors cpu;
+    private MEXEnum.EnumRAM memory;
     private String hd;
-    private String cache;
+    private MEXEnum.EnumCaches cache;
     private String os;
     private String video;
 
-    public String getCpu() {
+    public MEXEnum.EnumProcessors getCpu() {
         return cpu;
     }
 
-    public void setCpu(String cpu) {
+    public void setCpu(MEXEnum.EnumProcessors cpu) {
         this.cpu = cpu;
     }
 
-    public String getMemory() {
+    public MEXEnum.EnumRAM getMemory() {
         return memory;
     }
 
-    public void setMemory(String memory) {
+    public void setMemory(MEXEnum.EnumRAM memory) {
         this.memory = memory;
     }
 
@@ -34,11 +34,11 @@ public class Hardware {
         this.hd = hd;
     }
 
-    public String getCache() {
+    public MEXEnum.EnumCaches getCache() {
         return cache;
     }
 
-    public void setCache(String cache) {
+    public void setCache(MEXEnum.EnumCaches cache) {
         this.cache = cache;
     }
 
